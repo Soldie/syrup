@@ -38,9 +38,9 @@ class DockerFingerprint(object):
             with open(self.ip_file) as hostname_data:
                 ip = hostname_data.read().split("\n")[-1]
         if self.curl_exists:
-            results = fingerprint.CommonFingerprint(self.os).send_command("curl http://{}:4243/containers/$HOSTNAME/json".format(ip))
+            results = fingerprint.CommonFingerprint(self.os).send_command("curl http://{}:4243/containers/$HOSTNAME/json".format(ip.strip()))
         else:
-            results = urllib.urlopen("http://{}:4243/containers/$HOSTNAME/json".format(ip))
+            results = urllib.urlopen("http://{}:4243/containers/$HOSTNAME/json".format(ip.strip()))
         if results:
             return True
         return False
