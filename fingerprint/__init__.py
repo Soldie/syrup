@@ -41,9 +41,10 @@ class CommonFingerprint(object):
         useful_commands = [
             "nc --version", "netcat --version", "ssh --version", "curl --version", "wget --version",
             "gcc --version", "g++ --version", "docker --version", "sudo", "find --version", "putty --version",
-            "vstool --version"
+            "vstool --version", "git --version"
         ]
         for command in useful_commands:
+            print command
             try:
                 if self.os.lower() == "windows":
                     command = shlex.split("cmd.exe /r {}".format(command))
