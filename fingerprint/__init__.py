@@ -44,11 +44,14 @@ class CommonFingerprint(object):
             "vstool"
         ]
         for command in useful_commands:
-            if self.os.lower() == "windows":
-                command = shlex.split("cmd.exe /r {}".format(command))
-            else:
-                command = shlex.split(command)
-            results = self.send_command(command)
-            if results is not None:
-                available.append("".join(command))
+            try:
+                if self.os.lower() == "windows":
+                    command = shlex.split("cmd.exe /r {}".format(command))
+                else:
+                    command = shlex.split(command)
+                results = self.send_command(command)
+                if results is not None:
+                    available.append("".join(command))
+            except:
+                pass
         return available
