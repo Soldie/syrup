@@ -52,6 +52,7 @@ class CommonFingerprint(object):
                 results = self.send_command(command)
                 if results is not None:
                     available.append(command[0])
-            except:
+            except Exception as e:
+                print (e)
                 pass
         return available
