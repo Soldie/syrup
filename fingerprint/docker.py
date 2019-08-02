@@ -27,9 +27,10 @@ class DockerFingerprint(object):
             for item in data.split("\n"):
                 container_id.add(item.split("/docker/")[-1])
         for item in container_id:
-            long_id = item
-            short_id = item[0:12]
-            long_and_short.append((long_id, short_id))
+            if item != "":
+                long_id = item
+                short_id = item[0:12]
+                long_and_short.append((long_id, short_id))
         return long_and_short
 
     def check_for_api(self):
