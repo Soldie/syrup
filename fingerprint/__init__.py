@@ -39,9 +39,9 @@ class CommonFingerprint(object):
     def get_useful(self):
         available = []
         useful_commands = [
-            "nc", "netcat", "ssh", "curl", "wget", "gcc", "g++",
-            "bash", "sh", "zsh", "docker", "sudo", "find", "putty",
-            "vstool"
+            "nc --version", "netcat --version", "ssh --version", "curl --version", "wget --version",
+            "gcc --version", "g++ --version", "docker --version", "sudo", "find --version", "putty --version",
+            "vstool --version"
         ]
         for command in useful_commands:
             try:
