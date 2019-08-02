@@ -40,7 +40,7 @@ class CommonFingerprint(object):
     def get_useful(self):
         available = []
         useful_commands = [
-            "nc --version", "netcat --version", "ssh --version", "curl --version", "wget --version",
+            "nc --version", "netcat --version", "ssh", "curl --version", "wget --version",
             "gcc --version", "g++ --version", "docker --version", "sudo", "find --version", "putty --version",
             "vstool --version", "git --version"
         ]
