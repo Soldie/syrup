@@ -50,9 +50,9 @@ class CommonFingerprint(object):
                 else:
                     command = shlex.split(command)
                 results = self.send_command(command)
+                print results
                 if results is not None:
                     available.append(command[0])
-            except Exception as e:
-                print (e)
+            except Exception:
                 pass
         return available
