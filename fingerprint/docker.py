@@ -62,4 +62,11 @@ class DockerFingerprint(object):
             user_results = None
             available_commands = None
             available_users = None
-        return container_info, has_api, user_results, available_users, available_commands
+        return {
+            "is_docker": is_docker,
+            "container_ids": container_info,
+            "api_avilable": has_api,
+            "is_root": user_results,
+            "available_users": available_users,
+            "userful_commands": available_commands
+        }
