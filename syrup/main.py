@@ -1,2 +1,5 @@
+from fingerprint.docker import DockerFingerprint
+
+
 def main():
-    pass
+    print DockerFingerprint("unix").fingerprint_docker()
