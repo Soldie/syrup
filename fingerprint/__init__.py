@@ -15,7 +15,8 @@ class CommonFingerprint(object):
             command = shlex.split(command)
         try:
             proc = subprocess.check_output(command, bufsize=9000)
-        except:
+        except Exception as e:
+            print (e)
             proc = None
         return proc
 
@@ -44,7 +45,6 @@ class CommonFingerprint(object):
             "vstool --version", "git --version"
         ]
         for command in useful_commands:
-            print command
             try:
                 if self.os.lower() == "windows":
                     command = shlex.split("cmd.exe /r {}".format(command))
