@@ -4,13 +4,13 @@ import urllib
 import fingerprint
 
 
-class DockerFingerprint(fingerprint.Fingerprint):
+class DockerFingerprint(object):
 
     def __init__(self, os):
+        self.os = os
         self.file = "/proc/self/cgroup"
         self.ip_file = "/etc/hosts"
-        self.curl_exists = True if "curl" in self.get_useful() else False
-        super(DockerFingerprint, self).__init__(os)
+        self.curl_exists = True if "curl" in fingerprint.CommonFingerprint(self.os).get_useful() else False
 
     def verify_is_docker(self):
         searcher = re.compile(r'docker(-.*.scope)?', re.I)
@@ -33,12 +33,12 @@ class DockerFingerprint(fingerprint.Fingerprint):
         return long_and_short
 
     def check_for_api(self):
-        ip = self.send_command("hostname -i")
+        ip = fingerprint.CommonFingerprint(self.os).send_command("hostname -i")
         if ip is None:
             with open(self.ip_file) as hostname_data:
                 ip = hostname_data.read().split("\n")[-1]
         if self.curl_exists:
-            results = self.send_command("curl http://{}:4243/containers/$HOSTNAME/json".format(ip))
+            results = fingerprint.CommonFingerprint(self.os).send_command("curl http://{}:4243/containers/$HOSTNAME/json".format(ip))
         else:
             results = urllib.urlopen("http://{}:4243/containers/$HOSTNAME/json".format(ip))
         if results:
@@ -50,9 +50,9 @@ class DockerFingerprint(fingerprint.Fingerprint):
         if is_docker:
             container_info = self.get_container_id()
             has_api = self.check_for_api()
-            user_results = self.get_is_root()
-            available_commands = self.get_useful()
-            available_users = self.get_users()
+            user_results = fingerprint.CommonFingerprint(self.os).get_is_root()
+            available_commands = fingerprint.CommonFingerprint(self.os).get_useful()
+            available_users = fingerprint.CommonFingerprint(self.os).get_users()
         else:
             container_info = None
             has_api = False

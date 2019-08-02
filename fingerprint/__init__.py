@@ -4,7 +4,7 @@ import ctypes
 import subprocess
 
 
-class Fingerprint(object):
+class CommonFingerprint(object):
 
     def __init__(self, os):
         self.os = os
