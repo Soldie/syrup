@@ -6,11 +6,11 @@ import fingerprint
 
 class DockerFingerprint(fingerprint.Fingerprint):
 
-    def __init__(self, system):
+    def __init__(self, os):
         self.file = "/proc/self/cgroup"
         self.ip_file = "/etc/hosts"
         self.curl_exists = True if "curl" in self.get_useful() else False
-        super(DockerFingerprint, self).__init__(system)
+        super(DockerFingerprint, self).__init__(os)
 
     def verify_is_docker(self):
         searcher = re.compile(r'docker(-.*.scope)?', re.I)
