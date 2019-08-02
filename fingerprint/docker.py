@@ -40,8 +40,11 @@ class DockerFingerprint(object):
         if self.curl_exists:
             results = fingerprint.CommonFingerprint(self.os).send_command("curl http://{}:4243/containers/$HOSTNAME/json".format(ip.strip()))
         else:
-            results = urllib.urlopen("http://{}:4243/containers/$HOSTNAME/json".format(ip.strip()))
-        if results:
+            try:
+                results = urllib.urlopen("http://{}:4243/containers/$HOSTNAME/json".format(ip.strip()))
+            except IOError:
+                results = None
+        if results is not None:
             return True
         return False
 

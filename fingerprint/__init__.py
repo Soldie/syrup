@@ -51,7 +51,7 @@ class CommonFingerprint(object):
                     command = shlex.split(command)
                 results = self.send_command(command)
                 if results is not None:
-                    available.append("".join(command))
+                    available.append(command[0])
             except:
                 pass
         return available
